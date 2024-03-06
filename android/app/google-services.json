@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "447330700217",
+    "project_id": "job-alert-t7r2au",
+    "storage_bucket": "job-alert-t7r2au.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447330700217:android:86cc9dd46ac18d142e8468",
+        "android_client_info": {
+          "package_name": "com.jobalerts.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxGphpl3MfZIGZHXGDFZc_4O3jjnOGfp0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

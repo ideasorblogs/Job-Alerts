@@ -233,9 +233,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          await actions.openLink(
-                            'https://practicepedia.in',
-                          );
+                          context.pushNamed('Languageselector');
                         },
                         child: Text(
                           FFLocalizations.of(context).getText(

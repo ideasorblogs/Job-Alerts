@@ -90,6 +90,7 @@ class _MyAppState extends State<MyApp> {
         Locale('kn'),
         Locale('ml'),
         Locale('hi'),
+        Locale('te'),
       ],
       theme: ThemeData(
         brightness: Brightness.light,
@@ -128,6 +129,7 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'HomePage': const HomePageWidget(),
       'Jobs': const JobsWidget(),
+      'job_search': const JobSearchWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -139,7 +141,7 @@ class _NavBarPageState extends State<NavBarPage> {
           _currentPage = null;
           _currentPageName = tabs.keys.toList()[i];
         }),
-        backgroundColor: const Color(0xFFFAEF9B),
+        backgroundColor: const Color(0xFFF5F0BB),
         color: const Color(0xFF1D2B53),
         activeColor: const Color(0xFF1D2B53),
         tabBackgroundColor: const Color(0x00000000),
@@ -159,9 +161,16 @@ class _NavBarPageState extends State<NavBarPage> {
             iconSize: 24.0,
           ),
           GButton(
-            icon: Icons.search_sharp,
+            icon: Icons.explore_outlined,
             text: FFLocalizations.of(context).getText(
-              '3tbu0yg5' /* Jobs */,
+              '3tbu0yg5' /* Explore */,
+            ),
+            iconSize: 24.0,
+          ),
+          GButton(
+            icon: Icons.search_rounded,
+            text: FFLocalizations.of(context).getText(
+              '6v8jqptb' /* Jobs */,
             ),
             iconSize: 24.0,
           )

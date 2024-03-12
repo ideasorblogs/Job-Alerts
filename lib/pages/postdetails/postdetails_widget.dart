@@ -1,10 +1,11 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_web_view.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'postdetails_model.dart';
 export 'postdetails_model.dart';
 
@@ -46,40 +47,43 @@ class _PostdetailsWidgetState extends State<PostdetailsWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          iconTheme:
-              IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
-          automaticallyImplyLeading: false,
-          leading: InkWell(
-            splashColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            hoverColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onTap: () async {
-              context.safePop();
-            },
-            child: Icon(
-              Icons.arrow_back,
-              color: FlutterFlowTheme.of(context).secondaryText,
-              size: 24.0,
+        backgroundColor: Colors.white,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(60.0),
+          child: AppBar(
+            backgroundColor: const Color(0xFFF5F0BB),
+            iconTheme:
+                IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
+            automaticallyImplyLeading: false,
+            leading: InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                context.safePop();
+              },
+              child: Icon(
+                Icons.arrow_back,
+                color: FlutterFlowTheme.of(context).secondaryText,
+                size: 24.0,
+              ),
             ),
-          ),
-          title: AutoSizeText(
-            FFLocalizations.of(context).getText(
-              '3xe7nf3w' /* Job Alerts */,
+            title: AutoSizeText(
+              FFLocalizations.of(context).getText(
+                'tzp1li28' /* Job Alerts */,
+              ),
+              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    fontFamily: 'Outfit',
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.w600,
+                  ),
+              minFontSize: 18.0,
             ),
-            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                  fontFamily: 'Outfit',
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.w600,
-                ),
-            minFontSize: 18.0,
+            actions: const [],
+            centerTitle: true,
+            elevation: 0.5,
           ),
-          actions: const [],
-          centerTitle: true,
-          elevation: 0.5,
         ),
         body: SafeArea(
           top: true,
@@ -189,11 +193,13 @@ class _PostdetailsWidgetState extends State<PostdetailsWidget> {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
-                                                await launchURL(getJsonField(
-                                                  columnPostshowdetailsResponse
-                                                      .jsonBody,
-                                                  r'''$.link''',
-                                                ).toString());
+                                                await actions.openLink(
+                                                  getJsonField(
+                                                    columnPostshowdetailsResponse
+                                                        .jsonBody,
+                                                    r'''$.link''',
+                                                  ).toString(),
+                                                );
                                               },
                                               child: Icon(
                                                 Icons.link,
@@ -247,13 +253,15 @@ class _PostdetailsWidgetState extends State<PostdetailsWidget> {
                                           0.0, 20.0, 0.0, 30.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
-                                          await launchURL(getJsonField(
-                                            columnPostshowdetailsResponse
-                                                .jsonBody,
-                                            r'''$.meta._application''',
-                                          ).toString());
+                                          await actions.openLink(
+                                            getJsonField(
+                                              columnPostshowdetailsResponse
+                                                  .jsonBody,
+                                              r'''$.link''',
+                                            ).toString(),
+                                          );
                                         },
-                                        text: 'Apply now',
+                                        text: 'Show more',
                                         options: FFButtonOptions(
                                           width: double.infinity,
                                           height: 40.0,
@@ -301,13 +309,15 @@ class _PostdetailsWidgetState extends State<PostdetailsWidget> {
                                       thickness: 1.0,
                                       color: Color(0x2B14181B),
                                     ),
-                                    Html(
-                                      data: getJsonField(
+                                    FlutterFlowWebView(
+                                      content: getJsonField(
                                         columnPostshowdetailsResponse.jsonBody,
                                         r'''$.content.rendered''',
                                       ).toString(),
-                                      onLinkTap: (url, _, __, ___) =>
-                                          launchURL(url!),
+                                      height: 700.0,
+                                      verticalScroll: true,
+                                      horizontalScroll: false,
+                                      html: true,
                                     ),
                                   ],
                                 ),

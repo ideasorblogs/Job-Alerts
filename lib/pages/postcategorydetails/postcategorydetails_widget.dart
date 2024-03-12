@@ -2,6 +2,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'postcategorydetails_model.dart';
@@ -46,40 +47,43 @@ class _PostcategorydetailsWidgetState extends State<PostcategorydetailsWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          iconTheme:
-              IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
-          automaticallyImplyLeading: false,
-          leading: InkWell(
-            splashColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            hoverColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onTap: () async {
-              context.safePop();
-            },
-            child: Icon(
-              Icons.arrow_back,
-              color: FlutterFlowTheme.of(context).secondaryText,
-              size: 24.0,
+        backgroundColor: Colors.white,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(60.0),
+          child: AppBar(
+            backgroundColor: const Color(0xFFF5F0BB),
+            iconTheme:
+                IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
+            automaticallyImplyLeading: false,
+            leading: InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                context.safePop();
+              },
+              child: Icon(
+                Icons.arrow_back,
+                color: FlutterFlowTheme.of(context).secondaryText,
+                size: 24.0,
+              ),
             ),
-          ),
-          title: AutoSizeText(
-            FFLocalizations.of(context).getText(
-              '2mu60vg5' /* Job Alerts */,
+            title: AutoSizeText(
+              FFLocalizations.of(context).getText(
+                '1i3tp15i' /* Job Alerts */,
+              ),
+              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    fontFamily: 'Outfit',
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.w600,
+                  ),
+              minFontSize: 18.0,
             ),
-            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                  fontFamily: 'Outfit',
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.w600,
-                ),
-            minFontSize: 18.0,
+            actions: const [],
+            centerTitle: true,
+            elevation: 0.5,
           ),
-          actions: const [],
-          centerTitle: true,
-          elevation: 0.5,
         ),
         body: SafeArea(
           top: true,
@@ -166,12 +170,27 @@ class _PostcategorydetailsWidgetState extends State<PostcategorydetailsWidget> {
                                               padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 0.0, 10.0, 0.0),
-                                              child: Icon(
-                                                Icons.link,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                size: 24.0,
+                                              child: InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  await actions.openLink(
+                                                    getJsonField(
+                                                      postdetailsItem,
+                                                      r'''$.link''',
+                                                    ).toString(),
+                                                  );
+                                                },
+                                                child: Icon(
+                                                  Icons.link,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  size: 24.0,
+                                                ),
                                               ),
                                             ),
                                           ],

@@ -128,6 +128,45 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               postdetails: params.getParam('postdetails', ParamType.int),
             ),
           ),
+        ),
+        FFRoute(
+          name: 'job_search',
+          path: '/jobSearch',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'job_search')
+              : const NavBarPage(
+                  initialPage: 'job_search',
+                  page: JobSearchWidget(),
+                ),
+        ),
+        FFRoute(
+          name: 'job_search_details',
+          path: '/jobSearchDetails',
+          builder: (context, params) => NavBarPage(
+            initialPage: '',
+            page: JobSearchDetailsWidget(
+              jobsearchdetails:
+                  params.getParam('jobsearchdetails', ParamType.int),
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'postsearchdetails',
+          path: '/postsearchdetails',
+          builder: (context, params) => NavBarPage(
+            initialPage: '',
+            page: PostsearchdetailsWidget(
+              postdetails: params.getParam('postdetails', ParamType.int),
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'emailalert',
+          path: '/emailalert',
+          builder: (context, params) => const NavBarPage(
+            initialPage: '',
+            page: EmailalertWidget(),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

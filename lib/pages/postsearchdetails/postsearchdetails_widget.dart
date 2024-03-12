@@ -1,35 +1,36 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_web_view.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'details_model.dart';
-export 'details_model.dart';
+import 'postsearchdetails_model.dart';
+export 'postsearchdetails_model.dart';
 
-class DetailsWidget extends StatefulWidget {
-  const DetailsWidget({
+class PostsearchdetailsWidget extends StatefulWidget {
+  const PostsearchdetailsWidget({
     super.key,
-    required this.jobid,
+    required this.postdetails,
   });
 
-  final int? jobid;
+  final int? postdetails;
 
   @override
-  State<DetailsWidget> createState() => _DetailsWidgetState();
+  State<PostsearchdetailsWidget> createState() =>
+      _PostsearchdetailsWidgetState();
 }
 
-class _DetailsWidgetState extends State<DetailsWidget> {
-  late DetailsModel _model;
+class _PostsearchdetailsWidgetState extends State<PostsearchdetailsWidget> {
+  late PostsearchdetailsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => DetailsModel());
+    _model = createModel(context, () => PostsearchdetailsModel());
   }
 
   @override
@@ -47,7 +48,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Colors.white,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60.0),
           child: AppBar(
@@ -71,7 +72,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
             ),
             title: AutoSizeText(
               FFLocalizations.of(context).getText(
-                'cqn3fdrc' /* Job Alerts */,
+                '9hq6yykw' /* Job Alerts */,
               ),
               style: FlutterFlowTheme.of(context).bodyMedium.override(
                     fontFamily: 'Outfit',
@@ -88,8 +89,8 @@ class _DetailsWidgetState extends State<DetailsWidget> {
         body: SafeArea(
           top: true,
           child: FutureBuilder<ApiCallResponse>(
-            future: JobdetailsCall.call(
-              jobid: widget.jobid,
+            future: SearchdetailspostsCall.call(
+              queryid: widget.postdetails,
             ),
             builder: (context, snapshot) {
               // Customize what your widget looks like when it's loading.
@@ -106,7 +107,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                   ),
                 );
               }
-              final columnJobdetailsResponse = snapshot.data!;
+              final columnSearchdetailspostsResponse = snapshot.data!;
               return SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
@@ -138,7 +139,8 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                                           0.0, 10.0, 0.0, 10.0),
                                       child: Text(
                                         getJsonField(
-                                          columnJobdetailsResponse.jsonBody,
+                                          columnSearchdetailspostsResponse
+                                              .jsonBody,
                                           r'''$.title.rendered''',
                                         ).toString(),
                                         style: FlutterFlowTheme.of(context)
@@ -167,24 +169,12 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                                               Padding(
                                                 padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        0.0, 0.0, 2.0, 0.0),
-                                                child: Icon(
-                                                  Icons.business,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  size: 24.0,
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
                                                         5.0, 10.0, 0.0, 10.0),
                                                 child: Text(
                                                   getJsonField(
-                                                    columnJobdetailsResponse
+                                                    columnSearchdetailspostsResponse
                                                         .jsonBody,
-                                                    r'''$.meta._company_name''',
+                                                    r'''$.id''',
                                                   ).toString(),
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -206,7 +196,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                                               onTap: () async {
                                                 await actions.openLink(
                                                   getJsonField(
-                                                    columnJobdetailsResponse
+                                                    columnSearchdetailspostsResponse
                                                         .jsonBody,
                                                     r'''$.link''',
                                                   ).toString(),
@@ -235,27 +225,15 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
-                                              InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  await launchMap(
-                                                    address: getJsonField(
-                                                      columnJobdetailsResponse
-                                                          .jsonBody,
-                                                      r'''$.meta._job_location''',
-                                                    ).toString(),
-                                                    title: '',
-                                                  );
-                                                },
+                                              Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 5.0, 0.0, 10.0),
                                                 child: Text(
                                                   getJsonField(
-                                                    columnJobdetailsResponse
+                                                    columnSearchdetailspostsResponse
                                                         .jsonBody,
-                                                    r'''$.meta._job_location''',
+                                                    r'''$.date_gmt''',
                                                   ).toString(),
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -265,18 +243,6 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                                             ],
                                           ),
                                         ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 5.0, 0.0, 10.0),
-                                      child: Text(
-                                        getJsonField(
-                                          columnJobdetailsResponse.jsonBody,
-                                          r'''$.date_gmt''',
-                                        ).toString(),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
                                       ),
                                     ),
                                     const Divider(
@@ -290,12 +256,13 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                                         onPressed: () async {
                                           await actions.openLink(
                                             getJsonField(
-                                              columnJobdetailsResponse.jsonBody,
-                                              r'''$.meta._application''',
+                                              columnSearchdetailspostsResponse
+                                                  .jsonBody,
+                                              r'''$.link''',
                                             ).toString(),
                                           );
                                         },
-                                        text: 'Apply now',
+                                        text: 'Show more',
                                         options: FFButtonOptions(
                                           width: double.infinity,
                                           height: 40.0,
@@ -328,7 +295,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                                           0.0, 0.0, 0.0, 5.0),
                                       child: Text(
                                         FFLocalizations.of(context).getText(
-                                          'riooicff' /* Job Description */,
+                                          '5f9apxql' /* Job Description */,
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
@@ -343,13 +310,16 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                                       thickness: 1.0,
                                       color: Color(0x2B14181B),
                                     ),
-                                    Html(
-                                      data: getJsonField(
-                                        columnJobdetailsResponse.jsonBody,
+                                    FlutterFlowWebView(
+                                      content: getJsonField(
+                                        columnSearchdetailspostsResponse
+                                            .jsonBody,
                                         r'''$.content.rendered''',
                                       ).toString(),
-                                      onLinkTap: (url, _, __, ___) =>
-                                          launchURL(url!),
+                                      height: 700.0,
+                                      verticalScroll: true,
+                                      horizontalScroll: false,
+                                      html: true,
                                     ),
                                   ],
                                 ),

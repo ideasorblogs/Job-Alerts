@@ -245,6 +245,84 @@ class PostshowdetailsCall {
       ));
 }
 
+class SearchCall {
+  static Future<ApiCallResponse> call({
+    String? query = '',
+    String? subType = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'search',
+      apiUrl:
+          'https://jobalert.practicepedia.in/wp-json/wp/v2/search?search=$query&subtype=$subType&per_page=100',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class SearchdetailspostsCall {
+  static Future<ApiCallResponse> call({
+    int? queryid,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'searchdetailsposts',
+      apiUrl:
+          'https://jobalert.practicepedia.in/wp-json/wp/v2/posts/$queryid',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class SearchdataCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Searchdata',
+      apiUrl: 'https://jobalert.practicepedia.in/wp-json/wp/v2/search/',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class SearchdetailsjobsCall {
+  static Future<ApiCallResponse> call({
+    int? jobid,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'searchdetailsjobs',
+      apiUrl:
+          'https://jobalert.practicepedia.in/wp-json/wp/v2/job-listings/$jobid',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

@@ -61,4 +61,10 @@
             android:value="ca-app-pub-9182036747611858~3510207811"/>
 
     </application>
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
 </manifest>

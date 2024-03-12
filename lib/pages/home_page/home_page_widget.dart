@@ -124,7 +124,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
-                                    fontSize: 18.0,
+                                    fontSize: 16.0,
                                   ),
                         ),
                       ),
@@ -147,14 +147,26 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        FFLocalizations.of(context).getText(
-                          'bp6l9xgr' /* Rate us */,
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          await actions.openLink(
+                            'https://play.google.com/store/apps/details?id=com.jobalerts.app',
+                          );
+                        },
+                        child: Text(
+                          FFLocalizations.of(context).getText(
+                            'bp6l9xgr' /* Rate us */,
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    fontSize: 16.0,
+                                  ),
                         ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Readex Pro',
-                              fontSize: 18.0,
-                            ),
                       ),
                       Icon(
                         Icons.star_border,
@@ -192,7 +204,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
-                                    fontSize: 18.0,
+                                    fontSize: 16.0,
                                   ),
                         ),
                       ),
@@ -221,21 +233,23 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          context.safePop();
+                          await actions.openLink(
+                            'https://practicepedia.in',
+                          );
                         },
                         child: Text(
                           FFLocalizations.of(context).getText(
-                            'mybjhwqx' /* Exit */,
+                            'tguxijyr' /* Change App Language */,
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
-                                    fontSize: 18.0,
+                                    fontSize: 16.0,
                                   ),
                         ),
                       ),
-                      Icon(
-                        Icons.exit_to_app,
+                      FaIcon(
+                        FontAwesomeIcons.language,
                         color: FlutterFlowTheme.of(context).secondaryText,
                         size: 20.0,
                       ),

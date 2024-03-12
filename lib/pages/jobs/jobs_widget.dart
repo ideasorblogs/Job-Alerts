@@ -54,7 +54,7 @@ class _JobsWidgetState extends State<JobsWidget> {
               hoverColor: Colors.transparent,
               highlightColor: Colors.transparent,
               onTap: () async {
-                context.safePop();
+                context.pushNamed('HomePage');
               },
               child: Icon(
                 Icons.arrow_back,

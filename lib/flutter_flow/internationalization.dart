@@ -152,12 +152,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ml': 'അഭിമുഖം തയ്യാറാക്കൽ',
       'te': 'ఇంటర్వ్యూ తయారీ',
     },
-    'mybjhwqx': {
-      'en': 'Exit',
-      'hi': 'बाहर निकलना',
-      'kn': 'ನಿರ್ಗಮಿಸಿ',
-      'ml': 'പുറത്ത്',
-      'te': 'బయటకి దారి',
+    'tguxijyr': {
+      'en': 'Change App Language',
+      'hi': 'साक्षात्कार की तैयारी',
+      'kn': 'ಸಂದರ್ಶನದ ತಯಾರಿ',
+      'ml': 'അഭിമുഖം തയ്യാറാക്കൽ',
+      'te': 'ఇంటర్వ్యూ తయారీ',
     },
     'zdtytwwg': {
       'en': 'Home',

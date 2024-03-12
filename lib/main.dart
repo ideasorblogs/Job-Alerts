@@ -1,11 +1,16 @@
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
+
+import 'auth/custom_auth/auth_util.dart';
+import 'auth/custom_auth/custom_auth_user_provider.dart';
+
 import 'backend/firebase/firebase_config.dart';
-import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
-import 'flutter_flow/nav/nav.dart';
+import 'flutter_flow/internationalization.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'index.dart';
 
 void main() async {
@@ -13,9 +18,16 @@ void main() async {
   usePathUrlStrategy();
   await initFirebase();
 
-  await FlutterFlowTheme.initialize();
+  await authManager.initialize();
+  await FFLocalizations.initialize();
 
-  runApp(const MyApp());
+  final appState = FFAppState(); // Initialize FFAppState
+  await appState.initializePersistedState();
+
+  runApp(ChangeNotifierProvider(
+    create: (context) => appState,
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {
@@ -30,12 +42,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  ThemeMode _themeMode = FlutterFlowTheme.themeMode;
+  Locale? _locale = FFLocalizations.getStoredLocale();
+  ThemeMode _themeMode = ThemeMode.system;
+
+  late Stream<JobAlertsAuthUser> userStream;
 
   late AppStateNotifier _appStateNotifier;
   late GoRouter _router;
-
-  bool displaySplashImage = true;
 
   @override
   void initState() {
@@ -43,14 +56,22 @@ class _MyAppState extends State<MyApp> {
 
     _appStateNotifier = AppStateNotifier.instance;
     _router = createRouter(_appStateNotifier);
+    userStream = jobAlertsAuthUserStream()
+      ..listen((user) => _appStateNotifier.update(user));
 
-    Future.delayed(const Duration(milliseconds: 1000),
-        () => setState(() => _appStateNotifier.stopShowingSplashImage()));
+    Future.delayed(
+      const Duration(milliseconds: 1000),
+      () => _appStateNotifier.stopShowingSplashImage(),
+    );
+  }
+
+  void setLocale(String language) {
+    setState(() => _locale = createLocale(language));
+    FFLocalizations.storeLocale(language);
   }
 
   void setThemeMode(ThemeMode mode) => setState(() {
         _themeMode = mode;
-        FlutterFlowTheme.saveThemeMode(mode);
       });
 
   @override
@@ -58,16 +79,21 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp.router(
       title: 'Job Alerts ',
       localizationsDelegates: const [
+        FFLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: const [Locale('en', '')],
+      locale: _locale,
+      supportedLocales: const [
+        Locale('en'),
+        Locale('kn'),
+        Locale('ml'),
+        Locale('hi'),
+      ],
       theme: ThemeData(
         brightness: Brightness.light,
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
+        useMaterial3: false,
       ),
       themeMode: _themeMode,
       routerConfig: _router,
@@ -107,34 +133,37 @@ class _NavBarPageState extends State<NavBarPage> {
 
     return Scaffold(
       body: _currentPage ?? tabs[_currentPageName],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
-        onTap: (i) => setState(() {
+      bottomNavigationBar: GNav(
+        selectedIndex: currentIndex,
+        onTabChange: (i) => setState(() {
           _currentPage = null;
           _currentPageName = tabs.keys.toList()[i];
         }),
-        backgroundColor: Colors.white,
-        selectedItemColor: const Color(0xFFFFB662),
-        unselectedItemColor: const Color(0x8A000000),
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_outlined,
-              size: 24.0,
+        backgroundColor: const Color(0xFFFAEF9B),
+        color: const Color(0xFF1D2B53),
+        activeColor: const Color(0xFF1D2B53),
+        tabBackgroundColor: const Color(0x00000000),
+        tabBorderRadius: 100.0,
+        tabMargin: const EdgeInsetsDirectional.fromSTEB(5.0, 10.0, 5.0, 15.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(10.0, 8.0, 10.0, 8.0),
+        gap: 5.0,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        duration: const Duration(milliseconds: 500),
+        haptic: false,
+        tabs: [
+          GButton(
+            icon: currentIndex == 0 ? Icons.home : Icons.home_outlined,
+            text: FFLocalizations.of(context).getText(
+              'zdtytwwg' /* Home */,
             ),
-            label: 'Home',
-            tooltip: '',
+            iconSize: 24.0,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.search_sharp,
-              size: 24.0,
+          GButton(
+            icon: Icons.search_sharp,
+            text: FFLocalizations.of(context).getText(
+              '3tbu0yg5' /* Jobs */,
             ),
-            label: 'Jobs',
-            tooltip: '',
+            iconSize: 24.0,
           )
         ],
       ),

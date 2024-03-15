@@ -253,7 +253,7 @@ class SearchCall {
     return ApiManager.instance.makeApiCall(
       callName: 'search',
       apiUrl:
-          'https://jobalert.practicepedia.in/wp-json/wp/v2/search?search=$query&subtype=$subType&per_page=100',
+          'https://jobalert.practicepedia.in/wp-json/wp/v2/job-listings?search=$query&per_page=100',
       callType: ApiCallType.GET,
       headers: {},
       params: {},

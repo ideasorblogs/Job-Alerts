@@ -91,8 +91,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Jobs',
           path: '/jobs',
-          builder: (context, params) =>
-              params.isEmpty ? const NavBarPage(initialPage: 'Jobs') : const JobsWidget(),
+          builder: (context, params) => const JobsWidget(),
         ),
         FFRoute(
           name: 'Languageselector',

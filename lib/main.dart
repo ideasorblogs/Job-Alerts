@@ -128,7 +128,6 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'HomePage': const HomePageWidget(),
-      'Jobs': const JobsWidget(),
       'job_search': const JobSearchWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -157,13 +156,6 @@ class _NavBarPageState extends State<NavBarPage> {
             icon: currentIndex == 0 ? Icons.home : Icons.home_outlined,
             text: FFLocalizations.of(context).getText(
               'zdtytwwg' /* Home */,
-            ),
-            iconSize: 24.0,
-          ),
-          GButton(
-            icon: Icons.explore_outlined,
-            text: FFLocalizations.of(context).getText(
-              '3tbu0yg5' /* Explore */,
             ),
             iconSize: 24.0,
           ),
